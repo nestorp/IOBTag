@@ -43,6 +43,11 @@
             this.currentLabel = new System.Windows.Forms.Label();
             this.savedLabel = new System.Windows.Forms.Label();
             this.back = new System.Windows.Forms.Button();
+            this.fill = new System.Windows.Forms.Button();
+            this.instruct = new System.Windows.Forms.Label();
+            this.jumpBox = new System.Windows.Forms.TextBox();
+            this.jumpLabel = new System.Windows.Forms.Label();
+            this.jump = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,7 +62,7 @@
             this.bodyTextBox.Name = "bodyTextBox";
             this.bodyTextBox.ReadOnly = true;
             this.bodyTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.bodyTextBox.Size = new System.Drawing.Size(557, 61);
+            this.bodyTextBox.Size = new System.Drawing.Size(757, 61);
             this.bodyTextBox.TabIndex = 2;
             this.bodyTextBox.TabStop = false;
             // 
@@ -69,7 +74,7 @@
             this.wordsPanel.AutoScroll = true;
             this.wordsPanel.Location = new System.Drawing.Point(15, 111);
             this.wordsPanel.Name = "wordsPanel";
-            this.wordsPanel.Size = new System.Drawing.Size(557, 209);
+            this.wordsPanel.Size = new System.Drawing.Size(757, 391);
             this.wordsPanel.TabIndex = 3;
             // 
             // menuStrip1
@@ -80,7 +85,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(584, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(784, 24);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -143,7 +148,7 @@
             // 
             this.skip.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.skip.Enabled = false;
-            this.skip.Location = new System.Drawing.Point(315, 326);
+            this.skip.Location = new System.Drawing.Point(452, 526);
             this.skip.Name = "skip";
             this.skip.Size = new System.Drawing.Size(75, 23);
             this.skip.TabIndex = 5;
@@ -155,7 +160,7 @@
             // 
             this.currentLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.currentLabel.AutoSize = true;
-            this.currentLabel.Location = new System.Drawing.Point(0, 348);
+            this.currentLabel.Location = new System.Drawing.Point(0, 548);
             this.currentLabel.Name = "currentLabel";
             this.currentLabel.Size = new System.Drawing.Size(0, 13);
             this.currentLabel.TabIndex = 6;
@@ -164,7 +169,7 @@
             // 
             this.savedLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.savedLabel.AutoSize = true;
-            this.savedLabel.Location = new System.Drawing.Point(499, 339);
+            this.savedLabel.Location = new System.Drawing.Point(699, 539);
             this.savedLabel.Name = "savedLabel";
             this.savedLabel.Size = new System.Drawing.Size(0, 13);
             this.savedLabel.TabIndex = 7;
@@ -173,7 +178,7 @@
             // 
             this.back.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.back.Enabled = false;
-            this.back.Location = new System.Drawing.Point(218, 326);
+            this.back.Location = new System.Drawing.Point(251, 526);
             this.back.Name = "back";
             this.back.Size = new System.Drawing.Size(75, 23);
             this.back.TabIndex = 8;
@@ -181,11 +186,75 @@
             this.back.UseVisualStyleBackColor = true;
             this.back.Click += new System.EventHandler(this.back_Click);
             // 
+            // fill
+            // 
+            this.fill.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.fill.Enabled = false;
+            this.fill.Location = new System.Drawing.Point(352, 526);
+            this.fill.Name = "fill";
+            this.fill.Size = new System.Drawing.Size(75, 23);
+            this.fill.TabIndex = 9;
+            this.fill.Text = "Fill O";
+            this.fill.UseVisualStyleBackColor = true;
+            this.fill.Click += new System.EventHandler(this.fill_Click);
+            // 
+            // instruct
+            // 
+            this.instruct.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.instruct.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.instruct.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.instruct.Location = new System.Drawing.Point(0, 505);
+            this.instruct.Name = "instruct";
+            this.instruct.Size = new System.Drawing.Size(1006, 18);
+            this.instruct.TabIndex = 10;
+            this.instruct.Text = "O  : Out  - M : Medication - B-ADR : Begin Negative Reaction  -  I-ADR : Part of " +
+    "Negative Reaction  -  B-IND : Begin Positive Reaction  -  I-IND : Part of Positi" +
+    "ve Reaction";
+            this.instruct.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // jumpBox
+            // 
+            this.jumpBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.jumpBox.Enabled = false;
+            this.jumpBox.Location = new System.Drawing.Point(515, 528);
+            this.jumpBox.Name = "jumpBox";
+            this.jumpBox.Size = new System.Drawing.Size(60, 20);
+            this.jumpBox.TabIndex = 11;
+            // 
+            // jumpLabel
+            // 
+            this.jumpLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.jumpLabel.AutoSize = true;
+            this.jumpLabel.Location = new System.Drawing.Point(462, 531);
+            this.jumpLabel.Name = "jumpLabel";
+            this.jumpLabel.Size = new System.Drawing.Size(47, 13);
+            this.jumpLabel.TabIndex = 12;
+            this.jumpLabel.Text = "Skip To:";
+            this.jumpLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // jump
+            // 
+            this.jump.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.jump.Enabled = false;
+            this.jump.Location = new System.Drawing.Point(581, 526);
+            this.jump.Name = "jump";
+            this.jump.Size = new System.Drawing.Size(75, 23);
+            this.jump.TabIndex = 13;
+            this.jump.Text = "Go";
+            this.jump.UseVisualStyleBackColor = true;
+            this.jump.Click += new System.EventHandler(this.jump_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 361);
+            this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.jump);
+            this.Controls.Add(this.jumpLabel);
+            this.Controls.Add(this.jumpBox);
+            this.Controls.Add(this.instruct);
+            this.Controls.Add(this.fill);
             this.Controls.Add(this.back);
             this.Controls.Add(this.savedLabel);
             this.Controls.Add(this.currentLabel);
@@ -199,6 +268,7 @@
             this.Name = "Form1";
             this.Text = "IOBTag";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -221,6 +291,11 @@
         private System.Windows.Forms.Label savedLabel;
         private System.Windows.Forms.Button back;
         private System.Windows.Forms.ToolStripMenuItem exportFileToolStripMenuItem;
+        private System.Windows.Forms.Button fill;
+        private System.Windows.Forms.Label instruct;
+        private System.Windows.Forms.TextBox jumpBox;
+        private System.Windows.Forms.Label jumpLabel;
+        private System.Windows.Forms.Button jump;
     }
 }
 

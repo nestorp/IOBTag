@@ -18,6 +18,7 @@ namespace IOBTag
         public int index;
         public List<Post> posts = new List<Post>();
         Post currentPost;
+        public List<String> drugList = new List<String>();
 
         public Form1()
         {
@@ -40,7 +41,7 @@ namespace IOBTag
             posts.Clear();
 
             lines = File.ReadAllLines(fileName);
-            Tuple<int?, int?, int?, int?> colIndex = getColumns(lines.ElementAt(0));
+            Tuple<int?, int?, int?, int?, int?, int?> colIndex = getColumns(lines.ElementAt(0));
             for (int i=1; i<lines.Length; i++)
             {
                 Post post = new Post(lines.ElementAt(i), colIndex);
@@ -50,13 +51,15 @@ namespace IOBTag
             getPost();
         }
 
-        private Tuple<int?,int?,int?,int?> getColumns(string header)
+        private Tuple<int?,int?,int?,int?, int?, int?> getColumns(string header)
         {
             String[] cols = header.Split('|');
             int? bodyCol = null;
             int? wordlenCol = null;
             int? posCol = null;
             int? wordsCol = null;
+            int? iobsCol = null;
+            int? adrCol = null;
 
             for (int i =0; i<cols.Length;i++)
             {
@@ -79,10 +82,18 @@ namespace IOBTag
                     case "pos":
                         posCol = i;
                         break;
+
+                    case "iob":
+                        iobsCol = i;
+                        break;
+
+                    case "adr":
+                        adrCol = i;
+                        break;
                 }
             }
 
-            var colIndex = Tuple.Create(bodyCol, wordlenCol, wordsCol, posCol);
+            var colIndex = Tuple.Create(bodyCol, wordlenCol, wordsCol, posCol, iobsCol, adrCol);
 
             return colIndex;
         }
@@ -173,7 +184,10 @@ namespace IOBTag
                 {
                     String iob = iobs.ElementAt(i);
                     c.SelectedItem = iob;
+                } else if(drugList.Contains(w.Text)) {
+                    c.SelectedItem = "M";
                 }
+                c.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.combo_MouseWheel);
 
                 tLayout.Controls.Add(w);
                 tLayout.Controls.Add(c);
@@ -201,7 +215,9 @@ namespace IOBTag
                 loadFile();
                 back.Enabled = true;
                 skip.Enabled = true;
-                //save.Enabled = true;
+                fill.Enabled = true;
+                jump.Enabled = true;
+                jumpBox.Enabled = true;
             }
             
         }
@@ -258,12 +274,133 @@ namespace IOBTag
                 {
                     using (TextWriter tw = new StreamWriter(fs))
                     {
+                        //if (lines.ElementAt(0).Split('|').Length > 4)
+                        //{
+                        //    tw.WriteLine(lines.ElementAt(0));
+                        //} else
+                        //{
+                        //    tw.WriteLine(lines.ElementAt(0) + "|iob|adr");
+                        //}
+                        tw.WriteLine("body|wordlen|words|pos|iob|adr");
+
                         foreach (Post post in posts)
                         {
                             tw.WriteLine(post.getString());
                         }
                     }
                 }
+            }
+        }
+
+        private void fill_Click(object sender, EventArgs e)
+        {
+            foreach (FlowLayoutPanel l in wordsPanel.Controls)
+            {
+                foreach (Control ctrl in l.Controls)
+                {
+                    if (ctrl is ComboBox)
+                    {
+                        if (((ComboBox)ctrl).SelectedItem == null)
+                        {
+                            ((ComboBox)ctrl).SelectedItem = "O";
+                        }
+
+                    }
+                }
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            instruct.Text = "O: Out    |    M : Medication    |    B-ADR : Begin Negative Reaction    |    I-ADR : Part of Negative Reaction    |    B-IND : Begin Positive or Unrelated Reaction    |    I-IND : Part of Positive or Unrelated Reaction";
+            instruct.Width = this.Width;
+            fillDrugList();
+        }
+
+        void combo_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ComboBox control = (ComboBox)sender;
+            if (!control.DroppedDown)
+            {
+                ((HandledMouseEventArgs)e).Handled = true;
+            }
+              
+        }
+
+        private void fillDrugList()
+        {
+            drugList.Clear();
+            drugList.Add("abilify");
+            drugList.Add("alprazolam");
+            drugList.Add("amitriptyline");
+            drugList.Add("aplenzin");
+            drugList.Add("aripiprazole");
+            drugList.Add("atenolol");
+            drugList.Add("ativan");
+            drugList.Add("budeprion");
+            drugList.Add("bupropion");
+            drugList.Add("buspar");
+            drugList.Add("buspirone");
+            drugList.Add("celexa");
+            drugList.Add("citalopram");
+            drugList.Add("clonazepam");
+            drugList.Add("clonidine");
+            drugList.Add("cymbalta");
+            drugList.Add("deplin");
+            drugList.Add("desvenlafaxine");
+            drugList.Add("desyrel");
+            drugList.Add("diazepam");
+            drugList.Add("doxepin");
+            drugList.Add("duloxetine");
+            drugList.Add("effexor");
+            drugList.Add("escitalopram");
+            drugList.Add("fetzima");
+            drugList.Add("fluoxetine");
+            drugList.Add("forfivo");
+            drugList.Add("gabapentin");
+            drugList.Add("hydroxyzine");
+            drugList.Add("lamotrigine");
+            drugList.Add("lexapro");
+            drugList.Add("librium");
+            drugList.Add("lorazepam");
+            drugList.Add("methylphenidate");
+            drugList.Add("mirtazapine");
+            drugList.Add("nortriptyline");
+            drugList.Add("olanzapine");
+            drugList.Add("oleptro");
+            drugList.Add("paroxetine");
+            drugList.Add("paxil");
+            drugList.Add("pristiq");
+            drugList.Add("propranolol");
+            drugList.Add("prozac");
+            drugList.Add("quetiapine");
+            drugList.Add("remeron");
+            drugList.Add("seroquel");
+            drugList.Add("sertraline");
+            drugList.Add("tenormin");
+            drugList.Add("tramadol");
+            drugList.Add("trazodone");
+            drugList.Add("trintellix");
+            drugList.Add("valium");
+            drugList.Add("venlafaxine");
+            drugList.Add("viibryd");
+            drugList.Add("vistaril");
+            drugList.Add("wellbutrin");
+            drugList.Add("xanax");
+            drugList.Add("zoloft");
+            drugList.Add("zyprexa");
+
+        }
+
+        private void jump_Click(object sender, EventArgs e)
+        {
+            int parsedValue;
+
+            if (jumpBox.Text!=null && jumpBox.Text!=String.Empty && int.TryParse(jumpBox.Text, out parsedValue) 
+                && Convert.ToInt32(jumpBox.Text)<=posts.Count && Convert.ToInt32(jumpBox.Text) > 0)
+            {
+                index = Convert.ToInt32(jumpBox.Text) - 1;
+                getPost();
             }
         }
     }
